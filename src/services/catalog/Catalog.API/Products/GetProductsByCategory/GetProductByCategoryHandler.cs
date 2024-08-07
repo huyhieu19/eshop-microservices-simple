@@ -1,6 +1,7 @@
 ﻿
 namespace Catalog.API.Products;
 
+// Cannot change name
 public record GetProductsByCategoryQuery(string category) : IQuery<GetProductsByCategoryResult>;
 
 public record GetProductsByCategoryResult(IEnumerable<Product> Products);

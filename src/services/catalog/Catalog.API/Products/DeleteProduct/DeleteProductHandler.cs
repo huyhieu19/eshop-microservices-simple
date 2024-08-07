@@ -1,5 +1,6 @@
 ﻿namespace Catalog.API.Products;
 
+// Cannot change name
 public record DeleteProductCommand(Guid Id) : ICommand<DeleteProductResult>;
 
 public record DeleteProductResult(bool IsSuccess);
@@ -12,7 +13,7 @@ internal class DeleteProductCommandHandler(IDocumentSession session, ILogger<Del
         var product = await session.LoadAsync<Product>(command.Id);
         if (product is null)
         {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(command.Id);
         }
         session.Delete<Product>(command.Id);
         await session.SaveChangesAsync();

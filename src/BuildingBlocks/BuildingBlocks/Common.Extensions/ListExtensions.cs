@@ -11,3 +11,4 @@ public static class ListExtensions
         return string.Join(connectCharacter, list);
     }
 }
+

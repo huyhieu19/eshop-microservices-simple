@@ -1,6 +1,7 @@
 ﻿namespace Catalog.API.Products;
 public record CreateProductCommand(string Name, List<string> Category, string Description, string ImageFile, decimal Price) : ICommand<CreateProductResult>;
 
+// Cannot change name
 public record CreateProductResult(Guid Id);
 
 public class CreateProductCommandValidatior : AbstractValidator<CreateProductCommand>

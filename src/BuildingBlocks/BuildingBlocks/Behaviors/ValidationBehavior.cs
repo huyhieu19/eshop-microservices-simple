@@ -2,7 +2,7 @@
 using FluentValidation;
 using MediatR;
 
-namespace BuildingBlocks.Behaviors;
+namespace BuildingBlocks;
 public class ValidationBehavior<TRequest, TResponse>
     (IEnumerable<IValidator<TRequest>> validators)
     : IPipelineBehavior<TRequest, TResponse>
@@ -23,12 +23,10 @@ public class ValidationBehavior<TRequest, TResponse>
 
         if (failures.Count != 0)
         {
-            string message = string.Empty;
-            foreach (var failure in failures)
-            {
-                message += failure.ErrorMessage + "; ";
-            }
-            throw new ValidationException(message);
+            string message = failures.Select(p => p.ErrorMessage).FirstOrDefault()!;
+            string propertiesName = failures.Select(p => p.PropertyName).FirstOrDefault()!;
+            //throw new ValidationModelException(message, nameof(TRequest).ConvertToType(), propertiesName.ConvertListToCode());
+            throw new ValidationModelException(message, context.InstanceToValidate.GetType().Name, propertiesName);
         }
 
         return await next();
