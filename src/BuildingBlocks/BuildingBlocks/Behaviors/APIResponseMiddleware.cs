@@ -43,10 +43,10 @@ public class ApiResponseMiddleware
                     var errorMessage = "You do not have permission to access this website.";
 
                     // Create an ResponseModel with error details
-                    var apiResponse = new ResponseModel<object>
+                    var apiResponse = new CommonResponseModel<object>
                     {
                         IsSuccess = false,
-                        ErrorDetail = new CErrorDetailModel()
+                        ErrorDetail = new CommonErrorDetailModel()
                         {
                             ErrorMessage = errorMessage,
                         },
@@ -106,10 +106,10 @@ public class ApiResponseMiddleware
                 var errorMessage = details.Message;
 
                 // Create an ResponseModel with error details
-                var apiResponse = new ResponseModel<object>
+                var apiResponse = new CommonResponseModel<object>
                 {
                     IsSuccess = false,
-                    ErrorDetail = new CErrorDetailModel()
+                    ErrorDetail = new CommonErrorDetailModel()
                     {
                         ErrorMessage = details.Message,
                     },
@@ -150,7 +150,7 @@ public class ApiResponseMiddleware
         var responseData = JsonConvert.DeserializeObject(responseContent);
 
         // Create your ApiResponse<T> object
-        var apiResponse = new ResponseModel<object>
+        var apiResponse = new CommonResponseModel<object>
         {
             IsSuccess = true,
             Data = responseData,

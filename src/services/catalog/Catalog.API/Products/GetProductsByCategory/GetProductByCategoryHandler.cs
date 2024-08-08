@@ -6,6 +6,15 @@ public record GetProductsByCategoryQuery(string category) : IQuery<GetProductsBy
 
 public record GetProductsByCategoryResult(IEnumerable<Product> Products);
 
+public class GetProductsByCategoryValidatior : AbstractValidator<GetProductsByCategoryQuery>
+{
+    public GetProductsByCategoryValidatior()
+    {
+        RuleFor(x => x.category).NotEmpty().WithMessage("Category is required");
+    }
+}
+
+
 internal class GetProductByCategoryQueryHandler(IDocumentSession session, ILogger<GetProductByCategoryQueryHandler> logger) : IQueryHandler<GetProductsByCategoryQuery, GetProductsByCategoryResult>
 {
     public async Task<GetProductsByCategoryResult> Handle(GetProductsByCategoryQuery query, CancellationToken cancellationToken)
