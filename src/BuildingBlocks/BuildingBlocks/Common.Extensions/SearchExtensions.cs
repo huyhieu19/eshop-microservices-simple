@@ -6,6 +6,10 @@ public static class SearchExtensions
 {
     public static Expression<Func<T, bool>> CreateSearchPredicate<T>(string searchTerm, List<Expression<Func<T, object>>> whereToSearchs)
     {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+        {
+            return x => true;
+        }
         var elementParameter = Expression.Parameter(typeof(T), "element");
         Expression? combinedExpression = null;
 

@@ -4,29 +4,26 @@ public enum CErrorCode
 {
     Unknown = 0,
     // Product
-    ProductName = 1,
-    ProductCategory = 2,
-    ProductImageFile = 3,
-    ProductPrice = 4,
+    ProductId = 100,
+    ProductName = 101,
+    ProductCategory = 102,
+    ProductImageFile = 103,
+    ProductPrice = 104,
 
     //
+
 }
 public static class CErrorCodeExtensions
 {
     public static CErrorCode ErrorConvertToCode(this string property)
     {
-        switch (property.ToLower())
+        return property.ToLower() switch
         {
-            case "name":
-                return CErrorCode.ProductName;
-            case "category":
-                return CErrorCode.ProductCategory;
-            case "imagefile":
-                return CErrorCode.ProductImageFile;
-            case "price":
-                return CErrorCode.ProductPrice;
-            default:
-                return CErrorCode.Unknown;
-        }
+            "name" => CErrorCode.ProductName,
+            "category" => CErrorCode.ProductCategory,
+            "imagefile" => CErrorCode.ProductImageFile,
+            "price" => CErrorCode.ProductPrice,
+            _ => CErrorCode.Unknown,
+        };
     }
 }
