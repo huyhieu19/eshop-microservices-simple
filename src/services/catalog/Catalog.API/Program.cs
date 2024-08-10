@@ -5,6 +5,8 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+
 // Thêm dịch vụ Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -35,6 +37,7 @@ if (builder.Environment.IsDevelopment())
 
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
+
 //builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
@@ -43,11 +46,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
+    app.UseSwaggerUI(/*c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
         c.RoutePrefix = string.Empty; // Để Swagger UI chạy ở root URL
-    });
+    }*/);
 }
 
 app.UseHealthChecks("/health", new HealthCheckOptions
