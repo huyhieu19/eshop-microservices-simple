@@ -15,10 +15,13 @@ public class StoreBasketCommandValidatior : AbstractValidator<StoreBasketCommand
 }
 
 
-public class StoreBasketHandler : ICommandHandler<StoreBasketCommand, StoreBasketResult>
+internal class StoreBasketHandler(IBasketRepository repository) : ICommandHandler<StoreBasketCommand, StoreBasketResult>
 {
-    public async Task<StoreBasketResult> Handle(StoreBasketCommand request, CancellationToken cancellationToken)
+    public async Task<StoreBasketResult> Handle(StoreBasketCommand command, CancellationToken cancellationToken)
     {
+
+        await repository.StoreBasket(command.Cart, cancellationToken);
+
         return new StoreBasketResult(true);
     }
 }
