@@ -27,17 +27,20 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discount.Grpc", "services\Discount\Discount.Grpc\Discount.Grpc.csproj", "{3C3154EC-9727-4494-8BFA-1619317DA1B2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{3F8F06E1-806F-48C3-9486-AA228E1AFCC1}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.API", "services\Ordering\Ordering.API\Ordering.API.csproj", "{6AEEC2DB-45C3-490C-94D7-901C94C7987A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Domain", "services\Ordering\Ordering.Domain\Ordering.Domain.csproj", "{121733E8-D3B4-4425-9515-9DCAD2C64D33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.Domain", "services\Ordering\Ordering.Domain\Ordering.Domain.csproj", "{121733E8-D3B4-4425-9515-9DCAD2C64D33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Application", "services\Ordering\Ordering.Application\Ordering.Application.csproj", "{93332DFE-0A16-4BD4-BDE1-3B195969E17B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.Application", "services\Ordering\Ordering.Application\Ordering.Application.csproj", "{93332DFE-0A16-4BD4-BDE1-3B195969E17B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{121733E8-D3B4-4425-9515-9DCAD2C64D33} = {121733E8-D3B4-4425-9515-9DCAD2C64D33}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Infrastructure", "services\Ordering\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{5A6D50C8-F9AF-41A6-B7A6-3F76D8137E5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.Infrastructure", "services\Ordering\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{5A6D50C8-F9AF-41A6-B7A6-3F76D8137E5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
