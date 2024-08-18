@@ -18,7 +18,7 @@ public static class SearchExtensions
             var extracted = Expression.Invoke(expression, elementParameter);
 
             var toStringMethod = typeof(object).GetMethod("ToString");
-            var extractedAsString = Expression.Call(extracted, toStringMethod);
+            var extractedAsString = Expression.Call(extracted, toStringMethod!);
 
             var isNotNullOrEmpty = Expression.Not(
                 Expression.Call(
