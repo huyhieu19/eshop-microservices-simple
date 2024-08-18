@@ -4,6 +4,7 @@
 - dotnet add package Microsoft.EntityFrameworkCore
 - dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 - dotnet add package Microsoft.EntityFrameworkCore.Tools
+- dotnet add package Microsoft.EntityFrameworkCore.Design
 
 ### 2. Cấu Hình Chuỗi Kết Nối (Connection String)
 - Chuỗi kết nối là thông tin về cách ứng dụng kết nối tới cơ sở dữ liệu. Bạn cần cấu hình nó trong appsettings.json hoặc trực tiếp trong lớp DbContext.
@@ -39,12 +40,34 @@ public class ApplicationDbContext : DbContext
 
 ```
 
+### 2.1: Register EF Core DBContext to Asp.Net
+- Register into DependenceInjection.cs
+
+``` csharp
+services.AddDbContext<OrderingDbContext>((sp, options) =>
+{
+    options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+    options.UseSqlServer(connectionString);
+});
+```
+
+
 ### 3. Tạo Migration
 - Sau khi đã cấu hình xong DbContext, bạn có thể tạo migration bằng cách sử dụng CLI.
 ```
 dotnet ef migrations add InitialCreate
 ```
 - Lệnh trên sẽ tạo một thư mục Migrations trong dự án của bạn với các tệp tin chứa mã code để tạo và cập nhật cơ sở dữ liệu.
+
+- Command create Migration folder direction to choose folder.
+
+```
+Add-Migration InitialCreate -OutputDir <folder address (Data/Migrations)> -<Project Ordering.Infrastructure(name Project)> -<StartupProject Odering.API(name Project API)>
+
+
+Add-Migration InitialCreate -OutputDir Data/Migrations -Project Ordering.Infrastructure -StartupProject Ordering.API
+```
+
 ### 4. Áp Dụng Migration Vào Database
 - Để áp dụng migration vào cơ sở dữ liệu, bạn có thể sử dụng lệnh sau:
 ```
@@ -99,3 +122,45 @@ dotnet ef migrations list
 ```
 dotnet ef migrations remove
 ```
+
+--------------------------------
+
+# Docker
+
+## Configure Docker for SQL server
+
+[Visit microsoft learn](https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-docker-container-configure?view=sql-server-ver16&pivots=cs1-bash)
+
+
+
+
+### docker-compose.yml
+
+```
+
+  orderdb:
+    image: mcr.microsoft.com/mssql/server
+
+```
+
+### docker-compose.override.yml
+
+```
+
+  orderdb:
+    container_name: orderdb
+    environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=SwN12345678
+    restart: always
+    ports:
+        - "1433:1433"
+
+```
+
+### Configure Docker for 
+
+
+### docker-compose.yml
+
+### docker-compose.override.yml

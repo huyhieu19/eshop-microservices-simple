@@ -1,4 +1,6 @@
-﻿namespace Ordering.API
+﻿using BuildingBlocks;
+
+namespace Ordering.API
 {
     public static class DependencyInjection
     {
@@ -23,6 +25,8 @@
             //    {
             //        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             //    });
+
+            app.UseMiddleware<ApiResponseMiddleware>();
 
             return app;
         }
