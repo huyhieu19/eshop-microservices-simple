@@ -1,8 +1,3 @@
-using Discount.Grpc;
-using FluentValidation;
-using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -39,6 +34,9 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
     // options.InstanceName = "Basket";
 });
+
+// Async Commmunication services
+builder.Services.AddMessageBroker(builder.Configuration);
 
 //Cross-Cutting Services
 //builder.Services.AddExceptionHandler<CustomExceptionHandler>();
