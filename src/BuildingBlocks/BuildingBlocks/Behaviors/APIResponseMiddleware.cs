@@ -99,7 +99,6 @@ public class ApiResponseMiddleware
     {
         var bytes = Encoding.UTF8.GetBytes(content);
         await originalStream.WriteAsync(bytes, 0, bytes.Length);
-        originalStream.Seek(0, SeekOrigin.Begin);
     }
 
     private static string GetErrorMessage(int statusCode)
